@@ -1,0 +1,5 @@
+clinicalDataServerUrl: ${CLINICALDATASERVERURL:-http://192.168.1.10/fhir}
+patientIdentifierCodingSystem: ${PATIENTIDENTIFIERCODINGSYSTEM:-http://terminology.hl7.org/CodeSystem/v2-0203}
+patientIdentifierCodingCode: ${PATIENTIDENTIFIERCODINGCODE:-MR}
+exclude:
+  - name

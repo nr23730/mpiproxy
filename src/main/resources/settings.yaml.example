@@ -1,0 +1,5 @@
+clinicalDataServerUrl: http://192.168.1.10/fhir
+patientIdentifierCodingSystem: http://terminology.hl7.org/CodeSystem/v2-0203
+patientIdentifierCodingCode: MR
+exclude:
+  - name
