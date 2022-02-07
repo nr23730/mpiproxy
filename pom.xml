@@ -14,6 +14,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<start-class>de.uksh.medic.mpiproxy.MpiProxy</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,13 +43,13 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>31.0.1-jre</version>
-		  </dependency>
+		</dependency>
 
-		  <dependency>
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
 			<version>1.9</version>
-		  </dependency>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -1,0 +1,48 @@
+version: '3'
+services:
+  mpiproxy:
+    restart: unless-stopped
+    image: ghcr.io/nr23730/mpiproxy:${RELEASE:-latest}
+    build: .
+    depends_on:
+      - hapiserver
+    environment:
+      CLINICALDATASERVERURL: "http://hapiserver:8080/fhir/"
+      PATIENTIDENTIFIERCODINGSYSTEM: "http://terminology.hl7.org/CodeSystem/v2-0203"
+      PATIENTIDENTIFIERCODINGCODE: "MR"
+    ports:
+      - "8580:8080"
+    networks:
+      - mpiproxy_net
+  hapiserver:
+    restart: unless-stopped
+    image: hapiproject/hapi:v5.6.0
+    depends_on:
+      - hapi-postgres
+    environment:
+      hapi.fhir.server_address: "http://hapiserver:8080/fhir/"
+      hapi.fhir.narrative_enabled: 'false'
+      hapi.fhir.validation.requests_enabled: 'false'
+      spring.datasource.url: "jdbc:postgresql://hapi-postgres:5432/hapi?currentSchema=public"
+      spring.datasource.username: hapiserver
+      spring.datasource.password: ${POSTGRES_USER_PASSWORD:-P@ssword1}
+      spring.datasource.driverClassName: org.postgresql.Driver
+    networks:
+      - mpiproxy_net
+  hapi-postgres:
+    restart: unless-stopped
+    image: postgres:14.1-alpine
+    volumes:
+      - fhir_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: hapiserver
+      POSTGRES_PASSWORD: ${POSTGRES_USER_PASSWORD:-P@ssword1}
+      POSTGRES_DB: hapi
+    networks:
+      - mpiproxy_net
+
+networks:
+  mpiproxy_net: 
+  
+volumes:
+  fhir_data:
