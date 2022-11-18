@@ -16,7 +16,7 @@ services:
       - mpiproxy_net
   hapiserver:
     restart: unless-stopped
-    image: hapiproject/hapi:v6.1.0
+    image: hapiproject/hapi:v6.2.1
     depends_on:
       - hapi-postgres
     environment:
