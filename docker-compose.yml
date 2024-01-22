@@ -31,7 +31,7 @@ services:
       - mpiproxy_net
   hapi-postgres:
     restart: unless-stopped
-    image: postgres:16.0-alpine
+    image: postgres:16.1-alpine
     volumes:
       - fhir_data:/var/lib/postgresql/data
     environment:
